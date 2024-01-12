@@ -1,0 +1,24 @@
+version: 2
+# CREATE SOURCE IN RAW FOLDER ONLY 
+sources:
+  - name: raw_data_source
+    description: ""
+    database: DEMO
+    schema: DATA_SCHEMA
+    tables:
+      - name: EMP
+        identifier: EMPLOYEE
+      - name: ord
+        identifier: ORDERS
+
+      - name: PRD
+        identifier: PRODUCTS
+
+
+  - name: source_name
+    description: ""
+    database: ""
+    schema: ""
+    tables:
+      - name: ""
+        identifier: ""
