@@ -6,6 +6,13 @@ name: 'smauto'
 version: '1.0.0'
 config-version: 2
 
+
+#define variable inside file
+vars:
+    name: "sunil rathod"
+# dbt run --vars 'key:value'
+
+
 # This setting configures which "profile" dbt uses for this project.
 profile: 'smauto'
 
@@ -35,6 +42,12 @@ models:
     # Config indicated by + and applies to all files under models/example/
     raw_data:
       +materialized: view
+  #    +schema: OVERRIDE_CUSTOME_SCHEMA  # by defining schema here,we can override the custome schema inside profile.yml file
 
     conformed_data:  
       +materialized: view
+
+    publish_data:
+      +materialized: table  
+
+

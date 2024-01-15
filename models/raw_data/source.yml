@@ -15,10 +15,10 @@ sources:
         identifier: PRODUCTS
 
 
-  - name: source_name
+  - name: source_public_schema
     description: ""
-    database: ""
-    schema: ""
+    database: DEMO
+    schema: PUBLIC
     tables:
-      - name: ""
-        identifier: ""
+      - name: custmer
+        identifier: CUSTOMER_NEW
