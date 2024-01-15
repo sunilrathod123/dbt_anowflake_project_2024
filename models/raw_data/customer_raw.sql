@@ -9,4 +9,5 @@ renamed as (
    from source
 )
 select * from renamed order by CUSTOMER_ID
-  
+
+

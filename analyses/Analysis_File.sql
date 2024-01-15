@@ -1,1 +1,2 @@
-select * from {{ ref('customer_confirmed') }}
+select * from DEMO.FINAL_DATA_SCHEMA.SNAPSHOT_PRACTICE
+
