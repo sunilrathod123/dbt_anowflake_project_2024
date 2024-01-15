@@ -1,0 +1,30 @@
+version: 2
+#for generic test we create .yml file and run: dbt test
+#for generic test below test working fine
+#we can mention the documention configuration also to generate the document: dbt docs
+#
+models:
+  - name: employee_raw
+    description: "employee_raw check"
+    columns:
+      - name: age
+        description: "check null value"
+        tests:
+          - not_null 
+
+  - name: orders_raw
+    description: "check orders_raw"
+    columns:
+      - name: ORDER_ID
+        description: "check unique value"
+        tests:
+          - unique
+
+  - name: products_raw
+    description: "check products"
+    columns:
+      - name: PRODUCT_NAME
+        description: "check all product"
+        tests:
+          - accepted_values:
+              values: ['Laptop', 'Bookshelf', 'laptop', 'Smartphone']
