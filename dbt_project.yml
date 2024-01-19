@@ -51,4 +51,8 @@ models:
     publish_data:
       +materialized: table  
 
+    use_macros:
+      +materialized: view
+
+
 
