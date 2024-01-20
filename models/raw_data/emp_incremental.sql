@@ -9,10 +9,12 @@ select * from DEMO.PUBLIC.EMPLOYEE
 
 {% if is_incremental() %}
 
-  and HIRE_DATE >= ((select max(HIRE_DATE) from {{ this }}))
+  where HIRE_DATE >= ((select max(HIRE_DATE) from {{ this }}))
 
 {% endif %}
 
 )
 
 select * from source
+
+
