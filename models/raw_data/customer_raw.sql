@@ -8,6 +8,7 @@ renamed as (
     *
    from source
 )
-select * from renamed order by CUSTOMER_ID
 
+select *, {{ double_Salary()}} from renamed order by CUSTOMER_ID
+-- using macros here
 
