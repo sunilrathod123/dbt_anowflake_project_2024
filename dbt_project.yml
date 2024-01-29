@@ -39,6 +39,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
 models:
+# +transient: false
   smauto:
     # Config indicated by + and applies to all files under models/example/
     raw_data:
@@ -50,5 +51,24 @@ models:
 
     publish_data:
       +materialized: table  
+
+    use_macros:
+      +materialized: view   
+
+#below model override the target schema
+    override_target_schema: 
+      schema: override_schema_practice
+      +materialized: table  
+      +transient: false
+
+    raw_analysis: 
+      schema: raw_analysis_schema
+      +materialized: table  
+      +transient: false
+  
+
+
+      
+
 
 

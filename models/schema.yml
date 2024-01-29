@@ -1,4 +1,5 @@
 version: 2
+
 #for generic test we create .yml file and run: dbt test
 #for generic test below test working fine
 #we can mention the documention configuration also to generate the document: dbt docs

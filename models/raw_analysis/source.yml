@@ -1,0 +1,19 @@
+version: 2
+# CREATE SOURCE IN RAW FOLDER ONLY 
+sources:
+  - name: analysis_source
+    description: ""
+    database: DEMO
+    schema: PUBLIC
+
+    
+    tables:
+      - name: ord
+        identifier: ORDERS
+
+      - name: usr
+        identifier: USERS
+  
+
+
+
