@@ -1,17 +1,24 @@
 version: 2
 
-#for generic test we create .yml file and run: dbt test
-#for generic test below test working fine
-#we can mention the documention configuration also to generate the document: dbt docs
-#
+
+# For generic test we create .yml file and run: dbt test
+# For generic test below test working fine
+# We can mention the documentation configuration also to generate the document: dbt docs
+
 models:
   - name: employee_raw
     description: "employee_raw check"
     columns:
-      - name: age
+      - name: EMPLOYEE_ID
         description: "check null value"
         tests:
-          - not_null 
+          - not_null
+              # config: 
+              #   where: "last_name in ("Doe","Smith","Johnson")
+              #   severity: error
+              #   error_if: ">5"
+              #   warn_if: ">3"
+          - unique 
 
   - name: orders_raw
     description: "check orders_raw"
@@ -29,3 +36,7 @@ models:
         tests:
           - accepted_values:
               values: ['Laptop', 'Bookshelf', 'laptop', 'Smartphone']
+
+          # -relationship:
+          #   to:
+          #   field:    

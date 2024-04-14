@@ -32,22 +32,38 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 
+# hooks imp BEFORE START AND END OF MODULE 
+#on-run-start: "{{insert_record('ram'}}"  not working
+# on-run-start: "insert into DEMO.PUBLIC.RAW_EMP (EMPLOYEE_ID,FIRST_NAME,LAST_NAME) values (112,'sunil','rr')"
+# on-run-end: "insert into DEMO.PUBLIC.RAW_EMP (EMPLOYEE_ID,FIRST_NAME,LAST_NAME) values (112,'sunil','ee')"
+
+
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
 # In this example config, we tell dbt to build all models in the example/
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
+
 models:
-# +transient: false
+
+# # BEFORE START AND END OF each MODULE it run
+  # pre-hook: "insert into DEMO.PUBLIC.RAW_EMP (EMPLOYEE_ID,SALARY,DEPARTMENT) values (112,2222,'IT')"
+  # POST-HOOKS: "insert into DEMO.PUBLIC.RAW_EMP (EMPLOYEE_ID,SALARY,DEPARTMENT) values (112,2222,'IT')"
+
+
+
+
+# +transient: false          # :: it create permanent table in snowflake.        
   smauto:
     # Config indicated by + and applies to all files under models/example/
     raw_data:
       +materialized: view
-  #    +schema: OVERRIDE_CUSTOME_SCHEMA  # by defining schema here,we can override the custome schema inside profile.yml file
+      +schema: raw_data_SCHEMA  # by defining schema here,we can override the custome schema inside profile.yml file
 
     conformed_data:  
       +materialized: view
+      +schema: conformed_data_SCHEMA
 
     publish_data:
       +materialized: table  
@@ -55,19 +71,45 @@ models:
     use_macros:
       +materialized: view   
 
-#below model override the target schema
+    new_model:  
+      +materialized: view   
+
+#below model override the target schema and create the permanent table
     override_target_schema: 
       schema: override_schema_practice
       +materialized: table  
-      +transient: false
+      +transient: false                   
 
     raw_analysis: 
       schema: raw_analysis_schema
       +materialized: table  
-      +transient: false
+      +transient: false               #+transient: false    :: it create permanent table in snowflake.
+
+    
+
+
+
+
+
+#four type of materialized table , view , ephemeral, incremental 
+#python support table and view     
+#views are automatically updated and table not automatically update need to run again
+#table is fast for query
+#ephemeral not take space in warehouse, we can use this in other model, debug difficult
+#incremental : insert and update record (table)
+#delete+insert 
+#dbt 
+##by defalut table is transient, by making false it create parmanent table 
   
 
+###############################Hooks
 
+# pre-hook:  executed before model,seed,snapshot
+# post-hook: executed after model,seed,snapshot  
+
+#on-run-start: executed at the start of dbt run, dbt test, dbt seed , dbt snapshot
+
+#on-run-end: executed at the end of dbt run, dbt test, dbt seed , dbt snapshot
       
 
 

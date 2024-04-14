@@ -1,0 +1,1 @@
+select * from {{ ref("employee_raw") }} where first_name is not null

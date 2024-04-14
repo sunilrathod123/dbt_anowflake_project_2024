@@ -4,28 +4,51 @@ sources:
   - name: raw_data_source
     description: ""
     database: DEMO
-    schema: DATA_SCHEMA
+    schema: PUBLIC
 
  
 
     tables:
       - name: EMP
         identifier: EMPLOYEE
+#  command:  dbt source freshness
+        # freshness: 
+        #     warn_after: {count: 2, period: minute}
+
+        #     error_after: {count: 1, period: minute}
+        # loaded_at_field: HIRE_DATE
+  
+  
+  
+
       - name: ord
         identifier: ORDERS
 
       - name: PRD
-        identifier: PRODUCTS
+        identifier: PRODUCT
+
+      - name: custmer
+        identifier: CUSTOMER_NEW
+
 
 
   - name: source_public_schema
     description: ""
     database: DEMO
-    schema: PUBLIC
+    schema: AUTOMIBILE
     tables:
       - name: custmer
-        identifier: CUSTOMER_NEW
+        identifier: car
 
+
+
+
+
+        
+
+#source freshness check the source table is updeded on not in particular period
+# if the source  table is not updeded it gives warking
+#run command :::dbt source freshness
  #      freshness: 
  #         warn_after: {count: 12, period: hour}
  #         error_after: {count: 24, period: hour}

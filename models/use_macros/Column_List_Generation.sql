@@ -1,0 +1,2 @@
+SELECT {{ get_column_list('DEMO.PUBLIC.RAW_EMP') }}
+FROM DEMO.PUBLIC.RAW_EMP
