@@ -1,5 +1,5 @@
 {{
-  config(  materialized='incremental', unique_key= 'EMPLOYEE_ID' )
+  config(  materialized='incremental', incremental_strategy = 'delete+insert', unique_key= 'ORDER_ID' )
 }}
 
 -- when we use unique_key duplicate record not allowed
@@ -11,11 +11,11 @@
 
 with source as (
 
-select * from DEMO.PUBLIC.EMPLOYEE
+select * from DEMO.PUBLIC.ORDER_DATE_RECORD
 
 {% if is_incremental() %}
 
-  where HIRE_DATE >= ((select max(HIRE_DATE) from {{ this }}))
+  where ORDER_DATE >= ((select max(ORDER_DATE) from {{ this }}))
 
 {% endif %}
 

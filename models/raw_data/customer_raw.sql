@@ -1,6 +1,6 @@
 
 with source as (
-      select * from {{ source('source_public_schema', 'custmer') }}
+      select * from {{ source('raw_data_source', 'EMP') }}
 ),
 renamed as (
 
@@ -9,6 +9,6 @@ renamed as (
    from source
 )
 
-select *, {{ double_Salary()}} from renamed order by CUSTOMER_ID
+select *, {{ double_Salary()}} from renamed 
 -- using macros here
 

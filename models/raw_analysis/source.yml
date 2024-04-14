@@ -8,11 +8,14 @@ sources:
 
     
     tables:
-      - name: ord
-        identifier: ORDERS
+      - name: prod
+        identifier: PRODUCT
 
       - name: usr
         identifier: USERS
+
+      - name: ord
+        identifier: orders  
   
 
 

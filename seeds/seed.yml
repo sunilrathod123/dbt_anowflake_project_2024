@@ -1,0 +1,20 @@
+version: 2
+
+seeds:
+  - name: sports
+    config:
+      full_refresh: true
+      column_types:
+        counrty: varchar(20)
+        sports: varchar(20)
+        
+
+
+  - name: pin_code
+    config:
+      full_refresh: true    
+      
+
+#csv file best for static data which changes in frequently 
+#use command :: dbt seed  
+## it will create tabel in snowflake    

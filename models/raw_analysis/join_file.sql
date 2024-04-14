@@ -1,3 +1,11 @@
+{{
+  config(
+    
+    materialized='table'
+  )
+}}
+
+
 with cte1 as (
  
  select * from {{ ref('order_raw_analysis')}}

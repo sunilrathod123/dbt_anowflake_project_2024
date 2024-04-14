@@ -1,6 +1,7 @@
-with source as (
- 
- select * from {{ source('analysis_source','ord') }}
+with cte as (
+
+select * from {{ source('analysis_source', 'ord') }}
+
 )
 
- select * from source
+select * from cte
