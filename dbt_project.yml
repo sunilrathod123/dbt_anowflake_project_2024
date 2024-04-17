@@ -8,9 +8,12 @@ version: '1.0.0'
 config-version: 2
 
 
-#define variable inside file
+#define project variable here 
+#access variable>>dbt.config.get("name") 
+
 vars:
     name: "sunil rathod"
+    target_schema: my_python_schema
 # dbt run --vars 'key:value'
 
 
@@ -66,7 +69,9 @@ models:
       +schema: conformed_data_SCHEMA
 
     publish_data:
-      +materialized: table  
+      +materialized: table 
+      +transient: false  
+
 
     use_macros:
       +materialized: view   
@@ -76,7 +81,8 @@ models:
 
 #below model override the target schema and create the permanent table
     override_target_schema: 
-      schema: override_schema_practice
+      
+      +schema: override_schema_practice
       +materialized: table  
       +transient: false                   
 

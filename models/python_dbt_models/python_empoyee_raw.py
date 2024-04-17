@@ -33,6 +33,7 @@ def model(dbt,session):
 
 
 
+
     df_query_result=dbt.ref("employee_raw")
 
     df_query_result=df_query_result.withColumn("new_date",current_date()).withColumn("process",lit("process")) \

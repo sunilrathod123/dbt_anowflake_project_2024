@@ -1,5 +1,5 @@
  -- dubplicate record not allowd in unique_key='EMPLOYEE_ID'
- -- when this column chnages then it will updateupdated_at='HIRE_DATE'
+ -- when this column chnages then it will update updated_at='HIRE_DATE'
  
  {% snapshot raw_model_snapshot %}
 
