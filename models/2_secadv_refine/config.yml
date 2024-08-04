@@ -1,0 +1,15 @@
+version: 2
+
+
+# For generic test we create .yml file and run: dbt test
+# For generic test below test working fine
+# We can mention the documentation configuration also to generate the document: dbt docs
+
+models:
+  - name: secadv_bodsql_rp 
+    description: "secadv_bodsql_rp check"
+    columns:
+      - name: "ID"
+        description: "check null value"
+        tests:
+          - not_null

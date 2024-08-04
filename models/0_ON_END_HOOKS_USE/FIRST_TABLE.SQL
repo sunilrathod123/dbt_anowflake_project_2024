@@ -1,0 +1,1 @@
+ select * from {{ source('comreg', 'customers_join1') }}

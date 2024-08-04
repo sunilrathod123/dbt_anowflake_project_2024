@@ -1,0 +1,13 @@
+# .dbtignore
+
+# ignore individual .py files
+# not-a-dbt-adobe.py
+# another-non-dbt-model.py
+
+# ignore all .py files
+# **.py
+
+# ignore all .py files with "codegen" in the filename
+# *codegen*.py
+
+not-a-dbt-adobe.py

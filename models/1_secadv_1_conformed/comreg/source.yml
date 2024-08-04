@@ -1,0 +1,26 @@
+version: 2
+# CREATE SOURCE IN RAW FOLDER ONLY 
+# Helpful when any table, database, or schema name is changed in Snowflake. We only need to change the .yml file.
+
+sources:
+  - name: comreg
+    description: ""
+    database: DEMO
+    schema: PUBLIC
+
+    tables:
+      - name: orders_join2
+        identifier: orders_join2
+
+      - name: customers_join1
+        identifier: customers_join1 
+
+  - name: source_datas      
+    description: ""
+    database: DEMO
+    schema: PUBLIC
+
+    tables:
+      - name: sales_data                   
+                
+            

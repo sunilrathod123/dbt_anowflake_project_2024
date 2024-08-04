@@ -4,6 +4,7 @@ version: 2
 # For generic test we create .yml file and run: dbt test
 # For generic test below test working fine
 # We can mention the documentation configuration also to generate the document: dbt docs
+# in this file we can maintain the model test and python materialization and python variabl,project level variable
 
 models:
   - name: employee_raw
@@ -38,5 +39,45 @@ models:
               values: ['Laptop', 'Bookshelf', 'laptop', 'Smartphone']
 
           # -relationship:
-          #   to:
-          #   field:    
+          #   to: ref('model_name')
+          #   field: column_name   
+
+
+
+
+
+
+
+
+  # - name: my_model
+  #   tests:
+  #     - dbt_utils.unique_combination_of_columns:  # Call the macro
+  #         combination_of_columns:  # Specify the columns to check,the combination of column must be unique
+  #           - order_id
+  #           - product_id
+
+ # - name: my_model         # suppose this is python model and we can mention the sql model also
+#    description: ""
+#    config:
+#        materialized: table 
+#        peoject_level_variable_name:"{{var('name_of_variable')}}"  
+#   this is imp, before calling variable in python model.we need to call them here.and this variable 
+
+
+#name we cam use in python model
+         
+#       tests:
+#         - dbt_utils.unique_combination_of_columns:
+#             combination_of_columns:
+#               - customer_id
+#               - order_date
+#               - product_id
+#         - dbt_utils.object_has_output:
+#             config:
+#               severity: warn
+
+# --dbt_utils.unique_combination_of_columns:
+# -- This test ensures that the combination of customer_id, order_date, and product_id is unique in the orders table.
+
+# -- dbt_utils.object_has_output:
+# - This test checks if the model (or table) produces any output. If the model is empty, the test will trigger a warning.

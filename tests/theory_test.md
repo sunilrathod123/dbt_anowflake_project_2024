@@ -9,6 +9,9 @@ when the value contain the null in table >>>we can use in query as not null >>th
 
 ###for generic test we can create separate .yml file.
 
+practice more
+
 ==========================================================
 
 ##### severity test set as  :: gives as warning or error  (specify in generic test)
+

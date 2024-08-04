@@ -1,0 +1,1 @@
+select customer_id from {{ ref('DROP_THIS_TABLE_USING_HOOKS') }}

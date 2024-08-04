@@ -1,6 +1,6 @@
 {% macro total_sale() %}
 
 
-(profit-loss) as total_profit
+(BUY-SELL) as total_profit
   
 {% endmacro %}

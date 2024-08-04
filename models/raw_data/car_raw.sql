@@ -8,7 +8,7 @@
 with source as (
 
 
-select * from {{ source('source_public_schema', 'custmer') }}
+select * from {{ source('raw_data_source', 'car') }}
 
 ),
 

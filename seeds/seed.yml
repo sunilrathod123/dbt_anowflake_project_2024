@@ -13,8 +13,33 @@ seeds:
   - name: pin_code
     config:
       full_refresh: true    
+
+  - name: my_details
+    config:
+      full_refresh: true            #imp to create table
+#     quote_columns: false          #it avoid case sensitivity issue
       
+      column_types:
+          id: number(20)
+          name: varchar(20)
+
+
+  
+
+
+  - name: lpl_raw
+    columns:
+      - name: id
+        data_type: int
+      - name: name
+        data_type: varchar
+      - name: data
+        data_type: varchar
+        
+
+        
 
 #csv file best for static data which changes in frequently 
 #use command :: dbt seed  
-## it will create tabel in snowflake    
+## ONCE RUN THE DBT SEED ,it will create tabel in snowflake    
+# o> dbt seed -m  my_details.csv

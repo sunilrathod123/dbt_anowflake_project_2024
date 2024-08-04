@@ -4,5 +4,5 @@ packages:
 - package: dbt-labs/codegen
   version: 0.12.1
 - package: elementary-data/elementary
-  version: 0.13.2
-sha1_hash: 48749b0cd50255fac81658dedae56c18e019e971
+  version: 0.14.1
+sha1_hash: 7dd1f1440abfa78072f3d9c3ed7edb777e3d141e
