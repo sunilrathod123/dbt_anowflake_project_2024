@@ -12,6 +12,6 @@ select * from {{ source('raw_data_source', 'lpl') }}
 
  )
 
- select * from source
+ select *,'{{var("todayss")}}'::date as var_Date from source
 
  

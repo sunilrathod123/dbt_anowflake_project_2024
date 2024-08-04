@@ -1,0 +1,11 @@
+version: 2
+# CREATE SOURCE IN RAW FOLDER ONLY 
+# Helpful when any table, database, or schema name is changed in Snowflake. We only need to change the .yml file.
+
+sources:
+  - name: seed_secadv
+    description: ""
+    database: DEMO
+    schema: OUTPUT_DATA_SCHEMA
+    tables:
+     - name: sports  

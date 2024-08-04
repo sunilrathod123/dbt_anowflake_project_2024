@@ -8,12 +8,28 @@ version: '1.0.0'
 config-version: 2
 
 
+
+
 #define project variable here 
 #access variable>>dbt.config.get("name") 
 
 vars:
-    name: "sunil rathod"
-    target_schema: my_python_schema
+ 
+ ##call macrose here , it work for sql model.
+  as_of_date_s: " {{ get_current_date() }}"      #{{ var("as_of_date_s") }} (in sql model)
+  statuss: "OFF"                    #ues in call_variable_in model.py
+
+  dd: "sunil"                          #"{{get_current()}}"
+  name: "sunil rathod"                 #  '{{ var("name") }}'
+  todayss: "2024-05-15"                #  '{{ var("todayss") }}'
+  process_date: "2024-05-16"           #  '{{ var("process_date") }}'         #for model refine_sale_data.sql
+
+  
+
+
+  target_schema: "my_python_schema"
+  #sql_date: '''{{var("as_of_Date")}}'''     # we are getting variable from airflow
+  
 # dbt run --vars 'key:value'
 
 
@@ -35,8 +51,25 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 
-# hooks imp BEFORE START AND END OF MODULE 
-#on-run-start: "{{insert_record('ram'}}"  not working
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> hooks imp BEFORE START AND END RUN DBT MODULE 
+#Logging and Auditing, Environment Setup and DROP TEMP TABLE, Notification and Alerting
+#
+
+
+on-run-start: |
+  CREATE TABLE IF NOT EXISTS demo.public.start_tmp_staging (id INT, name STRING);
+
+on-run-end: |
+  CREATE TABLE IF NOT EXISTS demo.public.end_tmp_staging (id INT, name STRING);
+  DROP TABLE if EXISTS  demo.public.start_tmp_staging; 
+
+
+# DROP view if EXISTS  demo.OUTPUT_DATA_SCHEMA.DROP_THIS_TABLE_USING_HOOKS;  
+
+# real use case drop table which created temparary, it will not work, we can achibe above using 
+
+
+
 # on-run-start: "insert into DEMO.PUBLIC.RAW_EMP (EMPLOYEE_ID,FIRST_NAME,LAST_NAME) values (112,'sunil','rr')"
 # on-run-end: "insert into DEMO.PUBLIC.RAW_EMP (EMPLOYEE_ID,FIRST_NAME,LAST_NAME) values (112,'sunil','ee')"
 
@@ -51,14 +84,35 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
 
 # # BEFORE START AND END OF each MODULE it run
+# >>>>>>>>>>>>>>>>Pre-hooks:
+# Log the start of the model run.
+# Clean up a temporary table.
+
+# >>>>>>>>> Post-hooks:
+# Log the end of the model run.
+# Update a metadata table with the last run time.
+# data validation
+
   # pre-hook: "insert into DEMO.PUBLIC.RAW_EMP (EMPLOYEE_ID,SALARY,DEPARTMENT) values (112,2222,'IT')"
-  # POST-HOOKS: "insert into DEMO.PUBLIC.RAW_EMP (EMPLOYEE_ID,SALARY,DEPARTMENT) values (112,2222,'IT')"
+  # POST-HOOK: "insert into DEMO.PUBLIC.RAW_EMP (EMPLOYEE_ID,SALARY,DEPARTMENT) values (112,2222,'IT')"
 
+  # pre-hook: "INSERT INTO audit_log (model_name, action, timestamp) VALUES ('raw_customers_join1', 'start', current_timestamp)"
+  # post-hook: "INSERT INTO audit_log (model_name, action, timestamp) VALUES ('raw_customers_join1', 'end', current_timestamp)"
+ 
+  
+  # pre-hook: 
+  #     - "{{ 'INSERT INTO audit_log (model_name, action, timestamp) VALUES (\"{}\", \"start\", current_timestamp)'.format(this.name) }}"
+  # # post-hook:
+  #     - "{{ 'INSERT INTO audit_log (model_name, action, timestamp) VALUES (\"{}\", \"end\", current_timestamp)'.format(this.name) }}"
 
-
-
+ 
+    
+    
 # +transient: false          # :: it create permanent table in snowflake.        
   smauto:
+  
+
+ 
     # Config indicated by + and applies to all files under models/example/
     raw_data:
       +materialized: view
@@ -82,7 +136,7 @@ models:
 #below model override the target schema and create the permanent table
     override_target_schema: 
       
-      +schema: override_schema_practice
+      +schema: override_schema_practice 
       +materialized: table  
       +transient: false                   
 
@@ -91,10 +145,22 @@ models:
       +materialized: table  
       +transient: false               #+transient: false    :: it create permanent table in snowflake.
 
+
+
+    1_secadv_1_conformed:
+      +schema: secadv_1_conformed
+      +materialized: view  
+
+#changing the output schema for python dbt file:::
+    python_dbt_models:
+      +schema: python_dbt_models_schema
+      +materialized: table 
+     
+
     
 
 
-
+# {{ config(materialized="incremental") }}   -- by using this old and new upded record keep 
 
 
 #four type of materialized table , view , ephemeral, incremental 
@@ -103,7 +169,7 @@ models:
 #table is fast for query
 #ephemeral not take space in warehouse, we can use this in other model, debug difficult
 #incremental : insert and update record (table)
-#delete+insert 
+#delete+insert >>>this is usefull to get all upded record. hen we are not deleting it wil keep all old record and new also
 #dbt 
 ##by defalut table is transient, by making false it create parmanent table 
   

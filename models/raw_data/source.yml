@@ -10,7 +10,7 @@ sources:
 
     tables:
       - name: EMP
-        identifier: EMPLOYEE
+        identifier: EMPLOYEES
 
       - name: ord
         identifier: ORDERS
@@ -18,8 +18,8 @@ sources:
       - name: PRD
         identifier: PRODUCT
 
-      - name: custmer
-        identifier: CUSTOMER_NEW
+      - name: car
+        identifier: car_raw
 
       - name: lpl
         identifier: LPL_TABLE

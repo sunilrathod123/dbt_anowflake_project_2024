@@ -1,0 +1,23 @@
+# vvimp we can access the variable from the dbt_project.yml to python model using below method
+#specify the detais of python module
+
+version: 2
+
+
+models:
+  - name: call_variable_inmodel
+    description: ""
+    config:
+      materialized: incremental
+      tags: [ 'python' ]
+
+      #below are the project level variable we are going to use in python model. this varoable defined in dbt_project.yml
+      dd: '{{ var("dd") }}'                    # dd_value = dbt.config.get("dd")  
+      todayss: '{{ var("todayss") }}'
+      statuss: '{{ var("statuss")}}'
+      #as_of_date:  '{{ var("as_of_date") }}'    #need to check macro variable how to call this one
+  # test:   
+
+  
+    
+      

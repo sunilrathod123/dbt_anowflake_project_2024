@@ -1,0 +1,25 @@
+version: 2
+# CREATE SOURCE IN RAW FOLDER ONLY 
+# Helpful when any table, database, or schema name is changed in Snowflake. We only need to change the .yml file.
+
+sources:
+  - name: secadv
+    description: ""
+    database: DEMO
+    schema: PUBLIC
+
+    tables:
+      - name: EMP
+        identifier: EMPLOYEE
+
+  - name: secadv_temp       -- this is important 
+    description: ""
+    database: DEMO
+    schema: PUBLIC
+
+    tables:
+      - name: EMP                     -- we are giving this for source
+        identifier: EMPLOYEE          -- this is actual table name 
+      
+
+        

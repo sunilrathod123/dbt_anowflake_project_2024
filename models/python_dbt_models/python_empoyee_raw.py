@@ -4,6 +4,7 @@ from snowflake.snowpark.window import *
 
 
 
+
 def model(dbt,session):
     
     # dbt.config(materialized="table")
@@ -29,7 +30,7 @@ def model(dbt,session):
             return "yes" if dep=="IT" else "no"
         
     
-
+#we can use if and else 
 
 
 
@@ -44,6 +45,9 @@ def model(dbt,session):
     df_query_result=df_query_result.with_column("win",rank().over(Window.partition_by("department").order_by('ID')))
     df_query_result=df_query_result.filter(col("win")==1).drop("win")
     # df_query_result=df_query_result.filter(col("DEPARTMENT")=="Sales")
+
+    ages_to_exclude = [35]
+    df_query_result = df_query_result.filter(not_(col("age").isin(ages_to_exclude)))
 
 
     
